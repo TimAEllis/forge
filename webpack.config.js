@@ -16,20 +16,20 @@ const outputs = [
   // core forge library crypto and utils
   {
     entry: ['./lib/index.js'],
-    filenameBase: 'forge'
+    filenameBase: 'forge',
   },
   // core forge library + extra utils and networking support
   {
     entry: ['./lib/index.all.js'],
-    filenameBase: 'forge.all'
+    filenameBase: 'forge.all',
   },
   // prime webworker
   {
     entry: ['./lib/prime.worker.js', './lib/forge.js'],
     filenameBase: 'prime.worker',
     library: null,
-    libraryTarget: null
-  }
+    libraryTarget: null,
+  },
   // Custom builds can be created by specifying the high level files you need
   // webpack will pull in dependencies as needed.
   //
@@ -60,20 +60,13 @@ const outputs = [
   //}
 ];
 
-outputs.forEach(info => {
+outputs.forEach((info) => {
   // common to bundle and minified
   const common = {
     // each output uses the "forge" name but with different contents
     entry: {
-      forge: info.entry
+      forge: info.entry,
     },
-    // disable various node shims as forge handles this manually
-    node: {
-      Buffer: false,
-      process: false,
-      crypto: false,
-      setImmediate: false
-    }
   };
 
   // plain unoptimized unminified bundle
@@ -83,13 +76,13 @@ outputs.forEach(info => {
       path: path.join(__dirname, 'dist'),
       filename: info.filenameBase + '.js',
       library: info.library || '[name]',
-      libraryTarget: info.libraryTarget || 'umd'
-    }
+      libraryTarget: info.libraryTarget || 'umd',
+    },
   });
-  if(info.library === null) {
+  if (info.library === null) {
     delete bundle.output.library;
   }
-  if(info.libraryTarget === null) {
+  if (info.libraryTarget === null) {
     delete bundle.output.libraryTarget;
   }
 
@@ -97,31 +90,16 @@ outputs.forEach(info => {
   const minify = Object.assign({}, common, {
     mode: 'production',
     output: {
-      path: path.join(__dirname, 'dist'),
       filename: info.filenameBase + '.min.js',
       library: info.library || '[name]',
-      libraryTarget: info.libraryTarget || 'umd'
+      libraryTarget: info.libraryTarget || 'umd',
     },
     devtool: 'cheap-module-source-map',
-    plugins: [
-      /*
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true,
-        compress: {
-          warnings: true
-        },
-        output: {
-          comments: false
-        }
-        //beautify: true
-      })
-      */
-    ]
   });
-  if(info.library === null) {
+  if (info.library === null) {
     delete minify.output.library;
   }
-  if(info.libraryTarget === null) {
+  if (info.libraryTarget === null) {
     delete minify.output.libraryTarget;
   }
 

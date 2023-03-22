@@ -1,6 +1,6 @@
 // Karma configuration
 
-module.exports = function(config) {
+module.exports = function (config) {
   // bundler to test: webpack, browserify
   var bundler = process.env.BUNDLER || 'webpack';
 
@@ -15,14 +15,17 @@ module.exports = function(config) {
     // for webworkers
     {
       pattern: 'lib/prime.worker.js',
-      watched: false, included: false, served: true, nocache: false
-    }
+      watched: false,
+      included: false,
+      served: true,
+      nocache: false,
+    },
   ];
 
-  if(bundler === 'browserify') {
+  if (bundler === 'browserify') {
     frameworks.push(bundler);
     preprocessors.push(bundler);
-  } else if(bundler === 'webpack') {
+  } else if (bundler === 'webpack') {
     preprocessors.push(bundler);
     preprocessors.push('sourcemap');
     files.push('tests/karma/web-worker-rsa.js');
@@ -42,8 +45,7 @@ module.exports = function(config) {
     files: files,
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors:
@@ -51,22 +53,26 @@ module.exports = function(config) {
     preprocessors: {
       'tests/unit/**.js': preprocessors,
       'tests/karma/**.js': preprocessors,
-      'lib/prime.worker.js': workerPreprocessors
+      'lib/prime.worker.js': workerPreprocessors,
     },
 
     webpack: {
       mode: 'development',
       devtool: 'inline-source-map',
-      node: {
-        Buffer: false,
-        process: false,
-        crypto: false,
-        setImmediate: false
-      }
+      module: {
+        rules: [
+          {
+            test: /web-worker-rsa\.js$/,
+            use: {
+              loader: 'worker-loader',
+            },
+          },
+        ],
+      },
     },
 
     browserify: {
-      debug: true
+      debug: true,
       //transform: ['uglifyify']
     },
 
@@ -101,12 +107,12 @@ module.exports = function(config) {
     customLaunchers: {
       IE9: {
         base: 'IE',
-        'x-ua-compatible': 'IE=EmulateIE9'
+        'x-ua-compatible': 'IE=EmulateIE9',
       },
       IE8: {
         base: 'IE',
-        'x-ua-compatible': 'IE=EmulateIE8'
-      }
+        'x-ua-compatible': 'IE=EmulateIE8',
+      },
     },
 
     // Continuous Integration mode
@@ -121,13 +127,13 @@ module.exports = function(config) {
     client: {
       mocha: {
         // increase from default 2s
-        timeout: 20000
-      }
+        timeout: 20000,
+      },
     },
 
     // Proxied paths
     proxies: {
-      '/forge/prime.worker.js': '/base/lib/prime.worker.js'
-    }
+      '/forge/prime.worker.js': '/base/lib/prime.worker.js',
+    },
   });
 };

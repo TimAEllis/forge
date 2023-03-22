@@ -1,9 +1,17 @@
-Forge ChangeLog
-===============
+# Forge ChangeLog
+
+## 2.0.0 - 2022-xx-xx
+
+### Changed
+
+- Update to `webpack@5` and `webpack-cli@4`.
+- **BREAKING**: Update node engine to `>= 10.13.0`. Old Node.js _may_ still
+  work, but due to tooling upgrades, they can no longer be tested.
 
 ## 1.3.1 - 2022-03-29
 
 ### Fixes
+
 - RFC 3447 and RFC 8017 allow for optional `DigestAlgorithm` `NULL` parameters
   for `sha*` algorithms and require `NULL` paramters for `md2` and `md5`
   algorithms.
@@ -11,6 +19,7 @@ Forge ChangeLog
 ## 1.3.0 - 2022-03-17
 
 ### Security
+
 - Three RSA PKCS#1 v1.5 signature verification issues were reported by Moosa
   Yahyazadeh (moosa-yahyazadeh@uiowa.edu).
 - **HIGH**: Leniency in checking `digestAlgorithm` structure can lead to
@@ -29,7 +38,7 @@ Forge ChangeLog
   - The code does not check for tailing garbage bytes after decoding a
     `DigestInfo` ASN.1 structure. This can allow padding bytes to be removed
     and garbage data added to forge a signature when a low public exponent is
-    being used.  For more information, please see ["Bleichenbacher's RSA
+    being used. For more information, please see ["Bleichenbacher's RSA
     signature forgery based on implementation
     error"](https://mailarchive.ietf.org/arch/msg/openpgp/5rnE9ZRN1AokBVj3VqblGlP63QE/)
     by Hal Finney.
@@ -43,6 +52,7 @@ Forge ChangeLog
   - GHSA ID: [GHSA-2r2c-g63r-vccr](https://github.com/digitalbazaar/forge/security/advisories/GHSA-2r2c-g63r-vccr)
 
 ### Fixed
+
 - [asn1] Add fallback to pretty print invalid UTF8 data.
 - [asn1] `fromDer` is now more strict and will default to ensuring all input
   bytes are parsed or throw an error. A new option `parseAllBytes` can disable
@@ -60,6 +70,7 @@ Forge ChangeLog
     that code may have to handle the errors from these stricter checks.
 
 ### Added
+
 - [oid] Added missing RFC 8017 PKCS1-v1-5DigestAlgorithms algorithm
   identifiers:
   - `1.2.840.113549.2.2` / `md2`
@@ -70,6 +81,7 @@ Forge ChangeLog
 ## 1.2.1 - 2022-01-11
 
 ### Fixed
+
 - [tests]: Load entire module to improve top-level testing and coverage
   reporting.
 - [log]: Refactor logging setup to avoid use of `URLSearchParams`.
@@ -77,16 +89,19 @@ Forge ChangeLog
 ## 1.2.0 - 2022-01-07
 
 ### Fixed
+
 - [x509] 'Expected' and 'Actual' issuers were backwards in verification failure
   message.
 
 ### Added
+
 - [oid,x509]: Added OID `1.3.14.3.2.29 / sha1WithRSASignature` for sha1 with
   RSA. Considered a deprecated equivalent to `1.2.840.113549.1.1.5 /
-  sha1WithRSAEncryption`. See [discussion and
+sha1WithRSAEncryption`. See [discussion and
   links](https://github.com/digitalbazaar/forge/issues/825).
 
 ### Changed
+
 - [x509]: Reduce duplicate code. Add helper function to create a signature
   digest given an signature algorithm OID. Add helper function to verify
   signatures.
@@ -94,6 +109,7 @@ Forge ChangeLog
 ## 1.1.0 - 2022-01-06
 
 ### Fixed
+
 - [x509]: Correctly compute certificate issuer and subject hashes to match
   behavior of openssl.
 - [pem]: Accept certificate requests with "NEW" in the label. "BEGIN NEW
@@ -102,6 +118,7 @@ Forge ChangeLog
 ## 1.0.0 - 2022-01-04
 
 ### Notes
+
 - **1.0.0**!
 - This project is over a decade old! Time for a 1.0.0 release.
 - The URL related changes may expose bugs in some of the networking related
@@ -110,6 +127,7 @@ Forge ChangeLog
   update the code or tests would be appreciated.
 
 ### Removed
+
 - **SECURITY**, **BREAKING**: Remove `forge.debug` API. The API has the
   potential for prototype pollution. This API was only briefly used by the
   maintainers for internal project debug purposes and was never intended to be
@@ -132,6 +150,7 @@ Forge ChangeLog
   `URL`, `URLSearchParams`, and custom code as needed.
 
 ### Changed
+
 - **BREAKING**: Increase supported Node.js version to 6.13.0 for URL support.
 - **BREAKING**: Renamed `master` branch to `main`.
 - **BREAKING**: Release process updated to use tooling that prefixes versions
@@ -141,9 +160,11 @@ Forge ChangeLog
   [another method](./README.md#installation).
 
 ### Added
+
 - OIDs for `surname`, `title`, and `givenName`.
 
 ### Fixed
+
 - **BREAKING**: OID 2.5.4.5 name fixed from `serialName` to `serialNumber`.
   Depending on how applications used this id to name association it could cause
   compatibility issues.
@@ -151,11 +172,13 @@ Forge ChangeLog
 ## 0.10.0 - 2020-09-01
 
 ### Changed
-- **BREAKING**: Node.js 4 no longer supported. The code *may* still work, and
+
+- **BREAKING**: Node.js 4 no longer supported. The code _may_ still work, and
   non-invasive patches to keep it working will be considered. However, more
   modern tools no longer support old Node.js versions making testing difficult.
 
 ### Removed
+
 - **BREAKING**: Remove `util.getPath`, `util.setPath`, and `util.deletePath`.
   `util.setPath` had a potential prototype pollution security issue when used
   with unsafe inputs. These functions are not used by `forge` itself. They date
@@ -169,9 +192,11 @@ Forge ChangeLog
 ## 0.9.2 - 2020-09-01
 
 ### Changed
+
 - Added `util.setPath` security note to function docs and to README.
 
 ### Notes
+
 - **SECURITY**: The `util.setPath` function has the potential to cause
   prototype pollution if used with unsafe input.
   - This function is **not** used internally by `forge`.
@@ -180,7 +205,7 @@ Forge ChangeLog
   - Usage with known input should function as expected. (Including input
     intentionally using potentially problematic keys.)
   - No code changes will be made to address this issue in 0.9.x. The current
-    behavior *could* be considered a feature rather than a security issue.
+    behavior _could_ be considered a feature rather than a security issue.
     0.10.0 will be released that removes `util.getPath` and `util.setPath`.
     Consider `get` and `set` from [lodash](https://lodash.com/) if you need
     replacements. But also consider the potential similar security issues with
@@ -191,52 +216,63 @@ Forge ChangeLog
 ## 0.9.1 - 2019-09-26
 
 ### Fixed
+
 - Ensure DES-CBC given IV is long enough for block size.
 
 ## 0.9.0 - 2019-09-04
 
 ### Added
+
 - Add ed25519.publicKeyFromAsn1 and ed25519.privateKeyFromAsn1 APIs.
 - A few OIDs used in EV certs.
 
 ### Fixed
+
 - Improve ed25519 NativeBuffer check.
 
 ## 0.8.5 - 2019-06-18
 
 ### Fixed
+
 - Remove use of `const`.
 
 ## 0.8.4 - 2019-05-22
 
 ### Changed
+
 - Replace all instances of Node.js `new Buffer` with `Buffer.from` and `Buffer.alloc`.
 
 ## 0.8.3 - 2019-05-15
 
 ### Fixed
+
 - Use basic character set for code.
 
 ## 0.8.2 - 2019-03-18
 
 ### Fixed
+
 - Fix tag calculation when continuing an AES-GCM block.
 
 ### Changed
+
 - Switch to eslint.
 
 ## 0.8.1 - 2019-02-23
 
 ### Fixed
+
 - Fix off-by-1 bug with kem random generation.
 
 ## 0.8.0 - 2019-01-31
 
 ### Fixed
+
 - Handle creation of certificates with `notBefore` and `notAfter` dates less
   than Jan 1, 1950 or greater than or equal to Jan 1, 2050.
 
 ### Added
+
 - Add OID 2.5.4.13 "description".
 - Add OID 2.16.840.1.113730.1.13 "nsComment".
   - Also handle extension when creating a certificate.
@@ -250,6 +286,7 @@ Forge ChangeLog
     option.
 
 ### Changed
+
 - Support WebCrypto API in web workers.
 - `rsa.generateKeyPair`:
   - Use `crypto.generateKeyPair`/`crypto.generateKeyPairSync` on Node.js if
@@ -263,29 +300,34 @@ Forge ChangeLog
   Please report such issues and they will be addressed.
 - `pki.verifyCertificateChain`:
   - Signature changed to `(caStore, chain, options)`. Older `(caStore, chain,
-    verify)` signature is still supported. New style is to to pass in a
+verify)` signature is still supported. New style is to to pass in a
     `verify` option.
 
 ## 0.7.6 - 2018-08-14
 
 ### Added
+
 - Test on Node.js 10.x.
 - Support for PKCS#7 detached signatures.
 
 ### Changed
+
 - Improve webpack/browser detection.
 
 ## 0.7.5 - 2018-03-30
 
 ### Fixed
+
 - Remove use of `const`.
 
 ## 0.7.4 - 2018-03-07
 
 ### Fixed
+
 - Potential regex denial of service in form.js.
 
 ### Added
+
 - Support for ED25519.
 - Support for baseN/base58.
 
@@ -296,10 +338,12 @@ Forge ChangeLog
 ## 0.7.2 - 2018-02-27
 
 ### Added
+
 - Support verification of SHA-384 certificates.
 - `1.2.840.10040.4.3'`/`dsa-with-sha1` OID.
 
 ### Fixed
+
 - Support importing PKCS#7 data with no certificates. RFC 2315 sec 9.1 states
   certificates are optional.
 - `asn1.equals` loop bug.
