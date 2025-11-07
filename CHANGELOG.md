@@ -8,6 +8,12 @@
 - **BREAKING**: Update node engine to `>= 10.13.0`. Old Node.js _may_ still
   work, but due to tooling upgrades, they can no longer be tested.
 
+## 1.3.3 2025-11-06
+
+### Fixes
+- Fix for vulnerability identified by CVE-2025-12816 PKCS#12 MAC verification bypass
+  due to missing macData enforcement and improper asn1.validate routine reported by Hunter Wodzenski.
+
 ## 1.3.2 - 2025-11-xx
 
 ### Security
