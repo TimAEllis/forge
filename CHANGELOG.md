@@ -18,7 +18,7 @@
     divergence that may bypass downstream cryptographic verifications and
     security decisions.
   - Reported by Hunter Wodzenski.
-  - CVE ID: [CVE-2025-12816](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-12816)
+  - CVE ID: [CVE-2025-12816](https://www.cve.org/CVERecord?id=CVE-2025-12816)
   - GHSA ID: [GHSA-5gfm-wpxj-wjgq](https://github.com/digitalbazaar/forge/security/advisories/GHSA-5gfm-wpxj-wjgq)
 - **HIGH**: ASN.1 Unbounded Recursion
   - An Uncontrolled Recursion (CWE-674) vulnerability in node-forge versions
@@ -27,6 +27,7 @@
     Denial-of-Service (DoS) via stack exhaustion when parsing untrusted DER
     inputs.
   - Reported by Hunter Wodzenski.
+  - CVE ID: [CVE-2025-66031](https://www.cve.org/CVERecord?id=CVE-2025-66031)
   - GHSA ID: [GHSA-554w-wpv2-vw27](https://github.com/digitalbazaar/forge/security/advisories/GHSA-554w-wpv2-vw27)
 - **MODERATE**: ASN.1 OID Integer Truncation
   - An Integer Overflow (CWE-190) vulnerability in node-forge versions 1.3.1
@@ -35,6 +36,7 @@
     as smaller, trusted OIDs due to 32-bit bitwise truncation, enabling the
     bypass of downstream OID-based security decisions.
   - Reported by Hunter Wodzenski.
+  - CVE ID: [CVE-2025-66030](https://www.cve.org/CVERecord?id=CVE-2025-66030)
   - GHSA ID: [GHSA-65ch-62r8-g69g](https://github.com/digitalbazaar/forge/security/advisories/GHSA-65ch-62r8-g69g)
 
 ### Fixed
