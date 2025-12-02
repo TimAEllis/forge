@@ -8,7 +8,7 @@
 - **BREAKING**: Update node engine to `>= 10.13.0`. Old Node.js _may_ still
   work, but due to tooling upgrades, they can no longer be tested.
 
-## 1.3.3 - 2025-12-xx
+## 1.3.3 - 2025-12-02
 
 ### Fixed
 - [pkcs12] Make digestAlgorithm parameters optional to fix PKCS#12/PFX issues
