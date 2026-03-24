@@ -8,7 +8,7 @@
 - **BREAKING**: Update node engine to `>= 10.13.0`. Old Node.js _may_ still
   work, but due to tooling upgrades, they can no longer be tested.
 
-## 1.4.0 - 2026-xx-xx
+## 1.4.0 - 2026-03-24
 
 ### Security
 - **HIGH**: Denial of Service in `BigInteger.modInverse()`
